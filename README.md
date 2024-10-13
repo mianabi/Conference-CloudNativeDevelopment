@@ -1,4 +1,4 @@
-# Conference-CloudNativeDevelopment
+# Conference-CloudNative Development
 ### Prerequisites
 install docker and VSCode on your Linux and run your SQL Server Container on it:
 ```yml
