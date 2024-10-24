@@ -40,3 +40,8 @@ In VisualStudio, it is enough to type in the Package Manager Console:
 ```yml
 update-database
 ```
+
+to Publish Conference.Api Project:
+```yml
+dotnet publish --os linux --arch x64 /t:PublishContainer -c Release
+```
