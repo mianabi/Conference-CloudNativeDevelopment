@@ -1,6 +1,7 @@
 # Conference-CloudNative Development
 ### Prerequisites
 in linux: install docker and VSCode and Azure Data Studio on your Linux and run your SQL Server Container on it:
+
 in Windows: install Docker Desktop and Azure Data Studio and run your SQL Server Container on it by run Powersherrl in admin mode: 
 ```yml
 docker pull mcr.microsoft.com/mssql/server
