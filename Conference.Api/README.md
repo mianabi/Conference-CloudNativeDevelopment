@@ -48,4 +48,5 @@ dotnet publish --os linux --arch x64 /t:PublishContainer -c Release
 to install Serilog type in the Package Manager Console:
 ```yml
 Install-Package Serilog.AspNetCore
+Install-Package Serilog.Sinks.Seq
 ```
