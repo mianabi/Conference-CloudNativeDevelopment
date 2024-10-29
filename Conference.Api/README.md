@@ -45,3 +45,7 @@ to Publish Conference.Api Project:
 ```yml
 dotnet publish --os linux --arch x64 /t:PublishContainer -c Release
 ```
+to install Serilog type in the Package Manager Console:
+```yml
+Install-Package Serilog.AspNetCore
+```
