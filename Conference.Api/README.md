@@ -50,3 +50,8 @@ to install Serilog type in the Package Manager Console:
 Install-Package Serilog.AspNetCore
 Install-Package Serilog.Sinks.Seq
 ```
+to Send Log in seq, you can up seq Container and run it on http://localhost:5341 by:
+```yml
+docker pull datalust/seq
+docker pulldocker run --name seq -d --restart unless-stopped -e ACCEPT_EULA=Y -p 5341:80 datalust/seq:latest datalust/seq
+```
