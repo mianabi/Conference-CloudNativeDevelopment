@@ -1,5 +1,5 @@
 # Conference-CloudNative Development
-### Prerequisites
+### Step 1
 in linux: install docker and VSCode and Azure Data Studio on your Linux and run your SQL Server Container on it:
 
 in Windows: install Docker Desktop and Azure Data Studio and run your SQL Server Container on it by run Powersherrl in admin mode: 
@@ -11,9 +11,8 @@ docker run -e 'ACCEPT_EULA=Y' -e 'SA_PASSWORD=Str0ng@124' -p 1400:1433 -d mcr.mi
 Before or after installing C# dev kit, dotNET 8 must be installed for this kit to work properly:
 
 https://learn.microsoft.com/en-us/dotnet/core/install/linux-ubuntu-install?pivots=os-linux-ubuntu-2404&tabs=dotnet8
-
+### Step 2
 To connect to the database in Linux, you need to install Azure Data Studio.
-
 Added Migration to the project:
 First, you must add the Nuget package to vscode and then install dotnet tools on your VM. Next, you must install dotnet-ef to complete the migration process:
 ```yml
@@ -45,6 +44,7 @@ to Publish Conference.Api Project:
 ```yml
 dotnet publish --os linux --arch x64 /t:PublishContainer -c Release
 ```
+### Step 3
 to install Serilog type in the Package Manager Console:
 ```yml
 Install-Package Serilog.AspNetCore
