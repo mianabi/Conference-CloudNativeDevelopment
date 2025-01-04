@@ -1,0 +1,66 @@
+services:
+  conference.api:
+    image: ${DOCKER_REGISTRY-}conferenceapi
+    build:
+      context: .
+      dockerfile: Conference.Api/Dockerfile
+    ports:
+      - "7106:7106"
+    environment:
+      - ASPNETCORE_URLS=http://*:7106
+    depends_on: [mssql, seq_logs]
+    networks:
+      - app-network
+
+  conference.mvc:
+    image: ${DOCKER_REGISTRY-}conferencemvc
+    build:
+      context: .
+      dockerfile: Conference.MVC/Dockerfile
+    ports:
+      - "7290:7290"
+    environment:
+      - ASPNETCORE_URLS=http://*:7290
+    depends_on:
+      - conference.api
+    networks:
+      - app-network
+
+  mssql:
+    image: "mcr.microsoft.com/mssql/server"
+    container_name: sql2
+    hostname: mssql
+    environment:
+      - MSSQL_SA_PASSWORD=Str0ng@124
+      - ACCEPT_EULA=Y     
+    restart: unless-stopped
+    ports:
+      - "1401:1433"
+    networks:
+      - app-network
+
+  seq_logs:
+    image: datalust/seq
+    restart: unless-stopped
+    ports:
+      - "5342:80"
+    environment:
+      - ACCEPT_EULA=Y
+    networks:
+      - app-network
+
+  nginx:
+    build:
+      context: . 
+      dockerfile: nginx/Dockerfile
+    ports:
+      - "44391:443"
+    depends_on:
+      - conference.mvc
+    networks:
+      - app-network
+    restart: always
+
+networks:
+  app-network:
+    driver: bridge
