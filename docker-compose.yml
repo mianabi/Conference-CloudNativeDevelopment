@@ -54,11 +54,14 @@ services:
       context: . 
       dockerfile: nginx/Dockerfile
     ports:
-      - "44391:443"
+      - "44391:44391"
     depends_on:
       - conference.mvc
     networks:
-      - app-network
+      app-network:
+        aliases:
+          - "conference.com"
+          - "api.conference.com"
     restart: always
 
 networks:
