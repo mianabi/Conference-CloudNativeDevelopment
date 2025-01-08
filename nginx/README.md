@@ -1,4 +1,4 @@
-**in this Section:
+in this Section:
 
 1-Configured NGINX as a Reverse Proxy Server
 
