@@ -1,18 +1,18 @@
-in this Section:
+## Config NGINX as a Reverse Proxy and  SSL Termination
 
-1-Configured NGINX as a Reverse Proxy Server
+### 1-Configured NGINX as a Reverse Proxy Server
 
-2-Configured SSL Termination
+### 2-Configured SSL Termination
  
-  2-1- Generates SSL Certificates(Self=Signed) with openssl in Linux
+###   2-1- Generates SSL Certificates(Self=Signed) with openssl in Linux
  
-  2-2- Imported Certificates to proxy Server
+###   2-2- Imported Certificates to proxy Server
  
-  2-3- Configures SSL cert trust between client and API
+###   2-3- Configures SSL cert trust between client and API
 
-3-Configured internal Docker Compose Network For Services
+### 3-Configured internal Docker Compose Network For Services
 
-4-Registered DNS names for Services and Proxy Server Requests
+### 4-Registered DNS names for Services and Proxy Server Requests
 
 to Generate key and crt file Certificates(Self=Signed) with openssl in Linux:
 ```yml
