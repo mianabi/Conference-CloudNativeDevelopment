@@ -1,0 +1,68 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: conferenceattendeesapi
+    namespace: dev
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: conferenceapi
+    spec:
+      containers:
+      - name: conferenceapi
+        image: trevoirwilliams/conferenceattendees-api:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ConnectionStrings__ConferenceAttendeeDatabaseConnection
+          value: Server=mssql-svc,1434;Database=ConferenceAttendeeDb;Trusted_Connection=false;MultipleActiveResultSets=true;Encrypt=false;user id=sa;password=P@ssword1;
+        - name: ASPNETCORE_URLS
+          value: http://*:80
+        - name: Serilog__WriteTo__1__Args__serverUrl
+          value: http://conferenceseq-svc
+  selector:
+    matchLabels:
+      app: conferenceapi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: conferenceapi-svc
+  namespace: dev
+spec:
+  type: NodePort
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 32001
+  selector:
+    app: conferenceapi
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: conferenceapi-scaling
+  namespace: dev
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: conferenceapi
+  minReplicas: 1
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 50
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: AverageValue
+        averageValue: 100Mi
