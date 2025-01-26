@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conferencemvc
+  namespace: dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: conferencemvc
+  template:
+    metadata:
+      labels:
+        app: conferencemvc
+    spec:
+      containers:
+      - name: conferencemvc
+        image: trevoirwilliams/conferenceattendees-mvc:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: ASPNETCORE_URLS
+          value: http://*:80
+        - name: BaseApiUrl
+          value: http://conferenceapi-svc
+        - name: Serilog__WriteTo__1__Args__serverUrl
+          value: http://conferenceseq-svc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: conferencemvc-svc
+  namespace: dev
+spec:
+  selector:
+    app: conferencemvc
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+      nodePort: 32002
+  type: NodePort
