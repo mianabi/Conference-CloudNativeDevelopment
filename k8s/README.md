@@ -1,4 +1,5 @@
 after install K8S to access cluster by dashbord folow this link:
+
 https://kubernetes.io/docs/tasks/access-application-cluster/web-ui-dashboard/
 
 ```yml
